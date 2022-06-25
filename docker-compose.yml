@@ -1,12 +1,17 @@
+
 version: '3.8'
 
 services:
 
-  api:
-    build: .
-    container_name: api
+  db: 
+    image: postgres:13
+    container_name: db
     environment:
-      - PORT=80
-      - DATABASE_URL=postgresql://postgres:postgres@tf-db.czjiom3rtt6e.us-east-1.rds.amazonaws.com:5432/tf-db?schema=public
+      DB_USER: tf-db
+      DB_NAME: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: tf-db.czjiom3rtt6e.us-east-1.rds.amazonaws.com
     ports:
-      - "80:80"
+      - "5432:5432"
+    volumes:
+      - /postgres:/var/lib/postgresql/data
